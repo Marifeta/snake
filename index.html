@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="btns.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Title</title>
+</head>
+<body>
+<header class="header">~~SNAKE~~</header>
+<div id="count" class="fff controls-btn--hidden">You lose!</div>
+<div style="margin-bottom: 16px; text-align: center">
+  <button class="button" onclick="window.location.reload()">New Game</button>
+</div>
+<section class="playground">
+  <div class="field">
+    <div class="wrr">
+      <div id="btns" class="btns">
+        <button id="start" class="btn1 controls-btn--position">►</button>
+      </div>
+      <canvas class="field-canvas"></canvas>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="left" class="btn2">◀</button>
+    <div class="controls-wrapper">
+      <button id="top" class="btn2">▲</button>
+      <button id="bottom" class="btn2">▼</button>
+    </div>
+    <button id="right" class="btn2">▶</button>
+  </div>
+</section>
+<script src="func.js"></script>
+<script src="modules/field.js"></script>
+<script src="modules/gameObject.js"></script>
+<script src="modules/snakeFood.js"></script>
+<script src="modules/snake.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
