@@ -20,6 +20,14 @@
     const continueBtn = document.getElementById('continue');
     const count = document.getElementById('count');
     const btns = document.getElementById('btns');
+    const pause = document.getElementById('pause');
+
+    pause.addEventListener('click', (e) => {
+        console.log(isPaused, 'isPaused')
+        if (!isPaused) {
+            pauseGame();
+        }
+    });
 
     canvas.addEventListener('dblclick', (e) => {
         console.log(isPaused, 'isPaused')
