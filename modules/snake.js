@@ -3,6 +3,7 @@ class Snake extends GameObject{
     constructor(field, x, y, snakeFood, speed = 500) {
         super(field, x, y);
         this.isMoving = false;
+        this.isLose = false;
         this.speed = speed;
         this.snakeBegining = {x, y};
         this.snakeFood = snakeFood;
@@ -52,6 +53,7 @@ class Snake extends GameObject{
                     || this.snakeBegining.y < 0
                     || myselfEating.length
                 ) {
+                    this.isLose = true;
                     this.setPause();
                 }
                 this.draw();
@@ -68,6 +70,5 @@ class Snake extends GameObject{
     setPause() {
         clearInterval(this.isMoving);
         this.isMoving = '';
-        console.log('pause');
     }
 }

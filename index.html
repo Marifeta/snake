@@ -3,33 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="btns.css">
   <link rel="stylesheet" href="style.css">
   <title>Title</title>
 </head>
 <body>
 <header class="header">~~SNAKE~~</header>
-<div id="count" class="fff controls-btn--hidden">You lose!</div>
-<div style="margin-bottom: 16px; text-align: center">
-  <button class="button" onclick="window.location.reload()">New Game</button>
-  <button id="pause" class="button">Pause</button>
+<div class="info">
+  <button class="button info__button" onclick="window.location.reload()">New Game</button>
+  <div id="count" class="text info__text hidden">You lose!</div>
 </div>
 <section class="playground">
-  <div class="field">
-    <div class="wrr">
-      <div id="btns" class="btns">
-        <button id="start" class="btn1 controls-btn--position">►</button>
+  <div class="field playground__field">
+    <div class="canvas field__canvas">
+      <div id="canvasControls" class="canvas__controls">
+        <button id="start" class="play-btn">►</button>
       </div>
       <canvas class="field-canvas"></canvas>
     </div>
   </div>
-  <div class="controls">
-    <button id="left" class="btn2">◀</button>
+  <div id="btns" class="controls playground__controls">
+    <button id="left" class="keyboard-key controls__btn">◀</button>
     <div class="controls-wrapper">
-      <button id="top" class="btn2">▲</button>
-      <button id="bottom" class="btn2">▼</button>
+      <button id="top" class="keyboard-key controls__btn">▲</button>
+      <button id="bottom" class="keyboard-key controls__btn">▼</button>
     </div>
-    <button id="right" class="btn2">▶</button>
+    <button id="right" class="keyboard-key controls__btn">▶</button>
   </div>
 </section>
 <script src="func.js"></script>

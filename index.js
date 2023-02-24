@@ -1,6 +1,7 @@
 (function (FieldClass, SnakeClass, SnakeFoodClass) {
     let isNewGame = true;
     let isPaused = false;
+    let isLose = false;
 
     const fieldWidth = 200;
     const fieldHeight = 200;
@@ -12,70 +13,47 @@
     field.setSplashScreen();
 
     const start = document.getElementById('start');
-    const top = document.getElementById('top');
-    const bottom = document.getElementById('bottom');
-    const left = document.getElementById('left');
-    const right = document.getElementById('right');
-    const refresh = document.getElementById('refresh');
-    const continueBtn = document.getElementById('continue');
     const count = document.getElementById('count');
     const btns = document.getElementById('btns');
-    const pause = document.getElementById('pause');
+    const canvasControls = document.getElementById('canvasControls');
 
-    pause.addEventListener('click', (e) => {
-        console.log(isPaused, 'isPaused')
-        if (!isPaused) {
-            pauseGame();
-        }
+    Object.defineProperty(snake, 'isLose', {
+        set: function(v) {
+            if (v) {
+                setLose();
+            }
+        },
     });
+    btns.addEventListener('click', (e) => {
+        const id = e.target.id;
+        if (snake.isMoving && id !== 'btns' && id.length > 0) {
+            snake.changeDirection(id)
+        }
+    })
+    canvas.addEventListener('dblclick', pauseGame);
 
-    canvas.addEventListener('dblclick', (e) => {
-        console.log(isPaused, 'isPaused')
-        if (!isPaused) {
-            pauseGame();
-        }
-    });
-    top.addEventListener('click', () => {
-        if (snake.isMoving) {
-            snake.changeDirection('top')
-        }
-    });
-    bottom.addEventListener('click', () => {
-        if (snake.isMoving) {
-            snake.changeDirection('bottom')
-        }
-    });
-    left.addEventListener('click', () => {
-        if (snake.isMoving) {
-            snake.changeDirection('left')
-        }
-    });
-    right.addEventListener('click', () => {
-        if (snake.isMoving) {
-            snake.changeDirection('right')
-        }
-    });
-    start.addEventListener('click', () => {
+    start.addEventListener('click', startGame);
+
+
+    function startGame() {
         if (isNewGame) {
-            startGame();
+            canvasControls.classList.add("hidden");
+            field.draw();
+            snake.move();
             isNewGame = false;
         } else {
             continueGame();
         }
-    });
 
-
-    function startGame() {
-        btns.classList.add("controls-btn--hidden");
-        field.draw();
-        snake.move();
     }
     function pauseGame () {
-        start.textContent = 'II';
-        snake.setPause();
-        isPaused = true;
-        btns.classList.add("paused-btn");
-        btns.classList.remove("controls-btn--hidden");
+        if (!isPaused) {
+            start.textContent = 'II';
+            snake.setPause();
+            isPaused = true;
+            canvasControls.classList.add("paused-btn");
+            canvasControls.classList.remove("hidden");
+        }
     }
     function continueGame() {
         if (snake.isMoving) {
@@ -83,27 +61,21 @@
         }
         isPaused = false;
         let x = 3
-        console.log(x, 'x');
         let g = setInterval(() => {
             start.textContent = `${x}`;
             if (x === 0) {
                 snake.move();
                 clearInterval(g);
-                btns.classList.remove("paused-btn");
-                btns.classList.add("controls-btn--hidden");
+                canvasControls.classList.remove("paused-btn");
+                canvasControls.classList.add("hidden");
             }
             --x;
         }, 500);
     }
-
-
-
-
-
-
-
-
-
-
+    function setLose() {
+        isLose = true;
+        count.classList.remove('hidden');
+        canvas.removeEventListener('dblclick', pauseGame);
+    }
 
 })(Field, Snake, SnakeFood);
