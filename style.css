@@ -92,10 +92,6 @@ body, html {
     justify-content: space-between;
 }
 
-.hidden {
-    display: none;
-}
-
 .button:hover {
     background-color: green;
     color: white;
@@ -210,4 +206,7 @@ body, html {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+.hidden {
+    display: none !important;
 }

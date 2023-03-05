@@ -1,81 +1,57 @@
-(function (FieldClass, SnakeClass, SnakeFoodClass) {
-    let isNewGame = true;
-    let isPaused = false;
-    let isLose = false;
+(function (Game) {
 
-    const fieldWidth = 200;
-    const fieldHeight = 200;
-    const canvas = document.querySelector('.field-canvas');
-    const ctx = canvas.getContext('2d');
-    const field = new FieldClass(ctx, fieldWidth,fieldHeight);
-    const snakeFood = new SnakeFoodClass(field, genRandXY(fieldWidth/10-1), genRandXY(fieldHeight/10-1));
-    const snake = new SnakeClass(field, genRandXY(fieldWidth/10-3), genRandXY(fieldHeight/10-3), snakeFood);
-    field.setSplashScreen();
+    const game = new Game(20, 20);
+    const platform = new Platform();
 
-    const start = document.getElementById('start');
-    const count = document.getElementById('count');
-    const btns = document.getElementById('btns');
-    const canvasControls = document.getElementById('canvasControls');
-
-    Object.defineProperty(snake, 'isLose', {
-        set: function(v) {
-            if (v) {
-                setLose();
-            }
-        },
-    });
-    btns.addEventListener('click', (e) => {
-        const id = e.target.id;
-        if (snake.isMoving && id !== 'btns' && id.length > 0) {
-            snake.changeDirection(id)
-        }
-    })
-    canvas.addEventListener('dblclick', pauseGame);
-
-    start.addEventListener('click', startGame);
-
-
-    function startGame() {
-        if (isNewGame) {
-            canvasControls.classList.add("hidden");
-            field.draw();
-            snake.move();
-            isNewGame = false;
-        } else {
-            continueGame();
-        }
-
-    }
-    function pauseGame () {
-        if (!isPaused) {
-            start.textContent = 'II';
-            snake.setPause();
-            isPaused = true;
-            canvasControls.classList.add("paused-btn");
-            canvasControls.classList.remove("hidden");
-        }
-    }
-    function continueGame() {
-        if (snake.isMoving) {
-            return;
-        }
-        isPaused = false;
+    function startWithCounter() {
         let x = 3
-        let g = setInterval(() => {
-            start.textContent = `${x}`;
+        let intervalId = setInterval(() => {
+            platform.ui.playButton.el.textContent = `${x}`;
             if (x === 0) {
-                snake.move();
-                clearInterval(g);
-                canvasControls.classList.remove("paused-btn");
-                canvasControls.classList.add("hidden");
+                clearInterval(intervalId);
+                platform.ui.canvasButtonsArea.hide();
+                game.start();
+                platform.ui.viewCanvas.draw(game.matrix, game.settings.color, game.settings.pixelSize);
             }
             --x;
         }, 500);
     }
-    function setLose() {
-        isLose = true;
-        count.classList.remove('hidden');
-        canvas.removeEventListener('dblclick', pauseGame);
-    }
 
-})(Field, Snake, SnakeFood);
+    platform.ui.viewCanvas.draw(picture.initial, game.settings.color, game.settings.pixelSize);
+    platform.ui.playButton.onClick = () => {
+        startWithCounter();
+    };
+    platform.ui.viewCanvas.onClick = () => {
+        game.pause();
+        platform.ui.playButton.el.textContent = 'II';
+        platform.ui.canvasButtonsArea.show();
+    };
+    platform.ui.controllers.onClick = (e) => {
+        const id = e.target.id;
+        if (game.state === STATE.CONTINUE && id.length > 0) {
+            game.changeSnakeDirection(id.toUpperCase());
+        }
+    };
+    let val = STATE.START;
+    Object.defineProperty(game, 'state', {
+        get: function () {
+            return val;
+        },
+        set: function(v) {
+            if (v === STATE.END) {
+                console.log('end game!!!');
+                platform.ui.viewCanvas.draw(picture.lose, game.settings.color, game.settings.pixelSize);
+            }
+            val = v;
+        },
+    });
+
+    Object.defineProperty(game, 'render', {
+        set: function(v) {
+            if (v && game.state !== STATE.END) {
+                platform.ui.viewCanvas.draw(game.matrix, game.settings.color, game.settings.pixelSize);
+            }
+        },
+    });
+
+})(Game);
