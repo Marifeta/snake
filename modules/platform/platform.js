@@ -7,7 +7,7 @@ class Platform {
             infoText: new InfoText(),
             viewCanvas: new ViewCanvas(),
             controllers: new Controllers(),
-
+            painter: new Painter(),
         };
     }
     removeListeners() {

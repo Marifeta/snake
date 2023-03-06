@@ -1,5 +1,18 @@
 (function (Game) {
-
+    const arrOfPictures =[
+        {name: 'apple', matrix: picture.apple, pixelSize: 1},
+        {name: 'turnUpRight', matrix: picture.turnUpRight,  pixelSize: 1},
+        {name: 'turnUpLeft', matrix: picture.turnUpLeft,  pixelSize: 1},
+        {name: 'turnDownRight', matrix: picture.turnDownRight,  pixelSize: 1},
+        {name: 'turnDownLeft', matrix: picture.turnDownLeft,  pixelSize: 1},
+        {name: 'bodyHz', matrix: picture.bodyHz,  pixelSize: 1},
+        {name: 'head', matrix: picture.head,  pixelSize: 1},
+        {name: 'bodyVt', matrix: picture.bodyVt,  pixelSize: 1},
+        {name: 'tailL', matrix: picture.tailL,  pixelSize: 1},
+        {name: 'tailR', matrix: picture.tailR,  pixelSize: 1},
+        {name: 'tailHz', matrix: picture.tailHz,  pixelSize: 1},
+        {name: 'tailVt', matrix: picture.tailVt,  pixelSize: 1},
+    ]
     const game = new Game(20, 20);
     const platform = new Platform();
 
@@ -16,8 +29,9 @@
             --x;
         }, 500);
     }
+    platform.ui.painter.createPictures(arrOfPictures, game.settings.color);
 
-    platform.ui.viewCanvas.draw(picture.initial, game.settings.color, game.settings.pixelSize);
+    platform.ui.viewCanvas.draw(picture.initial, game.settings.color, 10);
     platform.ui.playButton.onClick = () => {
         startWithCounter();
     };

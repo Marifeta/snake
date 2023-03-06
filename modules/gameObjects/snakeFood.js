@@ -1,5 +1,5 @@
 class SnakeFood {
-    label = 'x';
+    label = 'A';
     constructor() {
         this.coordinates = [];
     }
