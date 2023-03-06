@@ -1,4 +1,4 @@
-#[Start game](https://marifeta.github.io/snake/)
+# [Start game](https://marifeta.github.io/snake/)
 
 
 ## Description
