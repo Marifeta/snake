@@ -3,6 +3,10 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Goldman', cursive;
+}
+button {
+    font-family: 'Goldman', cursive;
 }
 .header {
     width: 100%;
