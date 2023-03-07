@@ -34,6 +34,8 @@ class ViewCanvas extends ViewControl {
                     this.drawImage('tailHz', f, i, pixelSize);
                 } else if (matrix[i][f] === 'P') {
                     this.drawImage('tailVt', f, i, pixelSize);
+                } else if (matrix[i][f] === 'G') {
+                    this.drawImage('poop', f, i, pixelSize);
                 } else {
                     this.newRect(f, i, color[matrix[i][f]], pixelSize);
                 }

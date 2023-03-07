@@ -1,6 +1,7 @@
-(function (Game) {
+(function (Game, pictures) {
     const arrOfPictures =[
         {name: 'apple', matrix: picture.apple, pixelSize: 1},
+        {name: 'banana', matrix: picture.banana, pixelSize: 1},
         {name: 'turnUpRight', matrix: picture.turnUpRight,  pixelSize: 1},
         {name: 'turnUpLeft', matrix: picture.turnUpLeft,  pixelSize: 1},
         {name: 'turnDownRight', matrix: picture.turnDownRight,  pixelSize: 1},
@@ -12,11 +13,28 @@
         {name: 'tailR', matrix: picture.tailR,  pixelSize: 1},
         {name: 'tailHz', matrix: picture.tailHz,  pixelSize: 1},
         {name: 'tailVt', matrix: picture.tailVt,  pixelSize: 1},
+        {name: 'poop', matrix: picture.poop,  pixelSize: 1},
     ]
     const game = new Game(20, 20);
     const platform = new Platform();
+    platform.ui.modeBtn.onClick= () => {
+        if (game.state === STATE.START) {
+            platform.ui.dialog.show();
+        }
+    };
+    platform.ui.dialog.onClick= (e) => {
+        const id = e.target.id;
+        if (id === 'accept') {
+            game.mode = MODE[platform.ui.dialog.returnCheckedValue()];
+            platform.ui.dialog.hide();
+        }
+    };
 
     function startWithCounter() {
+        if (game.state === STATE.PENDING) {
+            return;
+        }
+        game.state = STATE.PENDING;
         let x = 3
         let intervalId = setInterval(() => {
             platform.ui.playButton.el.textContent = `${x}`;
@@ -31,7 +49,12 @@
     }
     platform.ui.painter.createPictures(arrOfPictures, game.settings.color);
 
+
     platform.ui.viewCanvas.draw(picture.initial, game.settings.color, 10);
+    const list = document.getElementById('list');
+    Object.keys(pictures).forEach((data) => {
+        list.innerHTML += `<li><img src="${pictures[data].src}" alt=""></li>`
+    })
     platform.ui.playButton.onClick = () => {
         startWithCounter();
     };
@@ -68,4 +91,4 @@
         },
     });
 
-})(Game);
+})(Game, pictures);
