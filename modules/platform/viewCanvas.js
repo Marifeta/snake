@@ -11,7 +11,7 @@ class ViewCanvas extends ViewControl {
         for(let i = 0; i < matrix.length; i++){
             for(let f = 0; f < matrix[i].length; f++){
                 if (matrix[i][f] === 'A') {
-                    this.drawImage('apple', f, i, pixelSize);
+                    this.drawImage('apple', f, i, pixelSize, true);
                 } else if (matrix[i][f] === '1') {
                     this.drawImage('turnUpRight', f, i, pixelSize);
                 } else if (matrix[i][f] === '2') {
@@ -46,7 +46,11 @@ class ViewCanvas extends ViewControl {
         this.context.fillStyle = color;
         this.context.fillRect(col * pixelSize, row * pixelSize, pixelSize, pixelSize);
     }
-    drawImage(name, col, row, pixelSize) {
-        this.context.drawImage(pictures[name], col * pixelSize, row * pixelSize, 10, 10);
+    drawImage(name, col, row, pixelSize, isFood) {
+        if (isFood) {
+            this.context.drawImage(foodPicture, col * pixelSize, row * pixelSize, pixelSize, pixelSize);
+        } else {
+            this.context.drawImage(pictures[name], col * pixelSize, row * pixelSize, pixelSize, pixelSize);
+        }
     }
 }

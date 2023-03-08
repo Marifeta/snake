@@ -4,7 +4,7 @@ class Platform {
             playButton: new PlayButton(),
             reloadButton: new NewGameButton(),
             canvasButtonsArea: new CanvasButtonsArea(),
-            modeBtn: new ModeBtn(),
+            settingsButton: new SettingsButton(),
             viewCanvas: new ViewCanvas(),
             controllers: new Controllers(),
             painter: new Painter(),

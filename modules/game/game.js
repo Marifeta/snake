@@ -3,6 +3,8 @@ class Game {
     #isChangeDirection = false;
     state = STATE.START;
     mode = MODE.CLASSIC;
+    speed = SPEED.NORMAL;
+    food = FOOD.BANANA
     label = '-';
     render = false;
     objects = {
@@ -30,6 +32,9 @@ class Game {
             'n': '#f58f1b',
             'v': 'green',
             'z': '#205229',
+            'J': 'darkgray',
+            'j': 'gray',
+            u: 'pink'
         }
     };
     constructor(width, height) {
@@ -61,7 +66,7 @@ class Game {
                 this.objects.snake.label = 'o';
                 this.render = true;
                 this.#isChangeDirection = false;
-            }, this.objects.snake.speed);
+            }, this.speed.description);
     }
     pending() {
         this.state = STATE.PENDING;

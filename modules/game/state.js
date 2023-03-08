@@ -10,3 +10,13 @@ const MODE = Object.freeze({
     POOP: Symbol('poop'),
     GOD: Symbol('god'),
 });
+const FOOD = Object.freeze({
+    APPLE: Symbol('apple'),
+    BANANA: Symbol('banana'),
+    MOUSE: Symbol('mouse'),
+});
+const SPEED = Object.freeze({
+    SLOW: Symbol(500),
+    NORMAL: Symbol(350),
+    FAST: Symbol(200),
+});

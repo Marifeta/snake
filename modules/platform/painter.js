@@ -1,4 +1,5 @@
 const pictures = {};
+let foodPicture = null;
 
 class Painter {
     canvas = getElements('painter-canvas');
@@ -11,6 +12,9 @@ class Painter {
             this.draw(data.matrix, color, data.pixelSize)
             image.src = this.canvas.toDataURL();
             pictures[data.name] = image;
+            if(data.name === 'apple') {
+                foodPicture = image;
+            }
         });
     }
     draw(matrix, color, pixelSize) {

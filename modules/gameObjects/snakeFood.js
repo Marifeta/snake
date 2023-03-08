@@ -1,6 +1,5 @@
 class SnakeFood {
     label = 'A';
-    picture = null;
     constructor() {
         this.coordinates = [];
     }
