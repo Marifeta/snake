@@ -17,7 +17,7 @@
         {name: 'poop', matrix: PICTURES_MAP.poop,  pixelSize: 1},
     ];
 
-    const game = new Game(30, 30);
+    const game = new Game(24, 24);
     const platform = new Platform();
 
     function startWithCounter() {

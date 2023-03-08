@@ -14,7 +14,7 @@ class Game {
     };
     matrix = [];
     settings = {
-        pixelSize: 15,
+        pixelSize: 12,
         color: {
             b: "#000000",
             g: "#4f914c",
@@ -186,7 +186,7 @@ class Game {
         } else if (this.objects.snake.snakeHead.y > this.matrix.length - 1) {
             this.objects.snake.snakeHead = {x: this.objects.snake.snakeHead.x, y: 0};
             this.objects.snake.coordinates[0] = {x: this.objects.snake.snakeHead.x, y: 0};
-        } else if (this.objects.snake.snakeHead.x > this.matrix.length) {
+        } else if (this.objects.snake.snakeHead.x > this.matrix.length - 1) {
             this.objects.snake.snakeHead = {x: 0, y: this.objects.snake.snakeHead.y};
             this.objects.snake.coordinates[0] = {x: 0, y: this.objects.snake.snakeHead.y};
         }
