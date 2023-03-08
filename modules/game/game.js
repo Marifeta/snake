@@ -14,7 +14,7 @@ class Game {
     };
     matrix = [];
     settings = {
-        pixelSize: 10,
+        pixelSize: 15,
         color: {
             b: "#000000",
             g: "#4f914c",
