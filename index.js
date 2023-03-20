@@ -137,9 +137,7 @@
                 if (game.state === STATE.START || game.state === STATE.PAUSE) {
                     startWithCounter();
                 } else if (game.state === STATE.CONTINUE) {
-                    game.pause();
-                    platform.ui.playButton.el.textContent = 'II';
-                    platform.ui.canvasButtonsArea.show();
+                    platform.ui.viewCanvas.onClick();
                 }
             }
             if (game.state !== STATE.CONTINUE) {
