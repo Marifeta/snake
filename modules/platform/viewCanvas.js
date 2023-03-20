@@ -4,6 +4,10 @@ class ViewCanvas extends ViewControl {
     constructor() {
         super('viewCanvas', getElements('view-canvas'));
         this.el.addEventListener('dblclick', this.clickHandler.bind(this));
+        this.context.mozImageSmoothingEnabled = false;
+        this.context.webkitImageSmoothingEnabled = false;
+        this.context.msImageSmoothingEnabled = false;
+        this.context.imageSmoothingEnabled = false;
     }
     draw(matrix, color, pixelSize) {
         this.context.canvas.width = matrix.length * pixelSize;

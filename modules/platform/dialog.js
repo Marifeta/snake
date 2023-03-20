@@ -37,13 +37,13 @@ class Dialog extends ViewControl {
         return `<fieldset style="border: none">
       <legend style="font-weight: bold"> Choose Food</legend>
 
-      <input checked="checked" type="radio" id="apple" name="radio" value="APPLE">
-      <label for="apple"><img src="${pictures.apple.src}" alt=""></label><br>
+      <input ${this.gameFood === FOOD.APPLE ? 'checked' : ''} type="radio" id="apple" name="radio" value="APPLE">
+      <label for="apple"><img class="radio__img" src="${pictures.apple.src}" alt=""></label><br>
 
-      <input checked="unchecked" type="radio" id="banana" name="radio" value="BANANA">
-      <label for="banana"><img src="${pictures.banana.src}" alt=""></label><br>
-      <input checked="unchecked" type="radio" id="mouse" name="radio" value="MOUSE">
-      <label for="mouse"><img src="${pictures.mouse.src}" alt=""></label><br>
+      <input ${this.gameFood === FOOD.BANANA ? 'checked' : ''} type="radio" id="banana" name="radio" value="BANANA">
+      <label for="banana"><img class="radio__img" src="${pictures.banana.src}" alt=""></label><br>
+      <input ${this.gameFood === FOOD.MOUSE ? 'checked' : ''} type="radio" id="mouse" name="radio" value="MOUSE">
+      <label for="mouse"><img class="radio__img" src="${pictures.mouse.src}" alt=""></label><br>
     </fieldset>
     <button id="accept" class="button info__button">Accept</button>
     `;
@@ -52,12 +52,17 @@ class Dialog extends ViewControl {
     constructor() {
         super('dialog', getElements('dialog'));
         this.el.addEventListener('click', this.clickHandler.bind(this));
-
+        this.gameMode = '';
+        this.gameSpeed = '';
+        this.gameFood = '';
     }
     hide() {
         this.el.removeAttribute('open');
     }
-    show(kind) {
+    show(kind, gameMode, gameSpeed, gameFood) {
+        this.gameFood = gameFood;
+        this.gameMode = gameMode;
+        this.gameSpeed = gameSpeed;
         this.el.innerHTML = this[kind]();
         this.el.setAttribute("open", "open");
     }

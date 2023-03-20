@@ -10,22 +10,22 @@
   <title>Title</title>
 </head>
 <body>
-<header class="header">~~SNAKE~~</header>
-<div class="info">
-  <button class="button info__button newGameButton" onclick="window.location.reload()">New Game</button>
-  <div class="settingsButton">
-    <button id="mode" class="button info__button ">Mode</button>
-    <button id="food" class="button info__button food">Food</button>
-    <button id="speed" class="button info__button speed">Speed</button>
-  </div>
-</div>
+<header class="header"><div>~~SNAKE~~</div></header>
 <div>
   <canvas style="display: none" class="painter-canvas"></canvas>
 </div>
 <section class="playground">
-  <dialog class="dialog" style="position: fixed; z-index: 100; border: 1px solid darkgrey">
+  <dialog class="dialog">
   </dialog>
   <div class="field playground__field">
+    <div class="info">
+      <button id="newGameButton" class="button info__button newGameButton" onclick="window.location.reload()">New Game</button>
+      <div class="settingsButton">
+        <button id="mode" class="button info__button ">Mode</button>
+        <button id="food" class="button info__button food">Food</button>
+        <button id="speed" class="button info__button speed">Speed</button>
+      </div>
+    </div>
     <div class="canvas field__canvas">
       <div id="canvasControls" class="canvas__controls">
         <button id="start" class="play-btn playButton">▶</button>
